@@ -1,0 +1,90 @@
+// ============================================================
+//  NEOcms — Fläche, Inhalts-Card, Werkzeugleiste
+//  Wie Outlook bzw. der NEO-Webmail-Skin: graue Fläche, der Inhalt liegt
+//  auf einer Card mit 12 px Rundung und feiner Linie (ohne Schatten —
+//  „kein Schein"). Die Werkzeugleiste über der Liste zeigt Fluent-Icon in
+//  Akzentfarbe plus Text; Darüberfahren tönt die Fläche.
+// ============================================================
+
+@use 'sass:map';
+@use 'icons' as *;
+@use 'icon-map' as *;
+
+#container {
+  background: var(--neo-canvas);
+}
+
+#main {
+  .content-top {
+    padding: 14px 16px 10px 8px;
+  }
+
+  #main_headline,
+  #main_breadcrumb {
+    color: var(--neo-heading);
+  }
+
+  #main_headline {
+    font-size: 1.2rem;
+  }
+
+  .content {
+    margin: 0 8px 8px 0;
+  }
+
+  .content,
+  .content-inner,
+  .content-filter {
+    border-color: var(--neo-card-border);
+  }
+}
+
+// ---- Werkzeugleiste (#tl_buttons: Neu, Alle öffnen, Mehrere bearbeiten …) ----
+$toolbar-buttons: header_clipboard, header_back, header_new, header_rss, header_edit_all,
+  header_new_folder, header_css_import, header_theme_import, header_toggle, header_sync,
+  header_filter_toggle;
+
+#tl_buttons > ul {
+  gap: 2px 4px;
+  padding: 8px 10px;
+}
+
+#tl_buttons {
+  @each $class in $toolbar-buttons {
+    .#{$class} {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 36px;
+      margin: 0;
+      padding: 0 10px;
+      border-radius: 6px;
+      background-image: none;
+      color: var(--neo-text);
+
+      &::before {
+        @include fl-icon(map.get($neo-bg-icons, $class));
+        color: var(--neo-toolbar-icon);
+      }
+
+      &:hover {
+        color: var(--neo-heading);
+        background-color: var(--neo-hover);
+      }
+    }
+  }
+
+  .header_filter_toggle.active::before {
+    mask-image: fl('filter_dismiss');
+  }
+}
+
+// Zeilen-Aktionen (Bearbeiten, Kopieren, Löschen …): Fluent-Schaltflächen
+// ohne Rahmen, Fläche erst beim Darüberfahren.
+.operations :is(a, button).has-icon {
+  border-radius: 6px;
+
+  &:hover {
+    background-color: var(--neo-hover);
+  }
+}

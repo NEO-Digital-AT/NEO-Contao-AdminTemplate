@@ -1,0 +1,16 @@
+{#
+    NEOcms-Logo für den Backend-Kopf (be_main) und die Anmeldeseite (be_login).
+    Zwei Formen: quer (Kopfzeile) und gestapelt (Anmeldung, modifier: 'login',
+    dort zentriert). Je Form zwei Fassungen (public/brand/): violett für das
+    helle, neon für das dunkle Schema. backend.css blendet die zum
+    html[data-color-scheme] passende ein; die andere ist display:none und damit
+    auch für Screenreader weg — der Name wird nur einmal vorgelesen.
+#}
+{% trans_default_domain 'contao_default' %}
+{% set stacked = modifier|default == 'login' %}
+{% set file = stacked ? 'neocms-logo' : 'neocms-logo-horizontal' %}
+{% set size = stacked ? {w: 202, h: 56} : {w: 215, h: 22} %}
+<span class="neo-brand{{ modifier|default ? ' neo-brand--' ~ modifier }}">
+    <img class="neo-brand__logo neo-brand__logo--light" src="{{ asset('brand/' ~ file ~ '-purple.svg', 'contao_neocms') }}" alt="{{ 'MSC.neocms_name'|trans }}" width="{{ size.w }}" height="{{ size.h }}">
+    <img class="neo-brand__logo neo-brand__logo--dark" src="{{ asset('brand/' ~ file ~ '-neon.svg', 'contao_neocms') }}" alt="{{ 'MSC.neocms_name'|trans }}" width="{{ size.w }}" height="{{ size.h }}">
+</span>

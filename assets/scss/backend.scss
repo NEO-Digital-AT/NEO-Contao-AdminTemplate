@@ -1,0 +1,33 @@
+// ============================================================
+//  NEOcms — das Contao-Backend im NEO-Look
+//  Wird von tools/build.mjs zu public/backend.<hash>.css übersetzt; das
+//  Bundle hängt die Datei über contao.backend.custom_css an jede
+//  Backend-Seite (inkl. Anmeldung). Die Website bekommt davon kein Byte.
+//
+//  Vorbild ist der NEO-Webmail-Skin für Roundcube (Outlook-Aufbau,
+//  Microsoft-Fluent-Icons, Satoshi/Space Grotesk): graue Fläche, Inhalt
+//  als Card, einklappbare Seitenleiste. Hell violett, dunkel neongrün.
+//
+//  Prinzip: Contao steuert sein Backend über CSS-Variablen (--text,
+//  --contao, --form-border …). Ein Großteil ist deshalb nur eine neue
+//  Belegung dieser Variablen (backend/_scheme.scss); eigene Regeln gibt es
+//  für Kopfzeile, Seitenleiste, Card, Felder, Knöpfe und Icons.
+//  Kern-Dateien von Contao werden nicht angefasst.
+// ============================================================
+
+@use 'tokens/colors';
+@use 'tokens/fonts';
+@use 'tokens/typography';
+@use 'tokens/effects';
+@use 'backend/scheme';
+@use 'backend/type';
+@use 'backend/brand';
+@use 'backend/navigation';
+@use 'backend/layout';
+@use 'backend/fields';
+@use 'backend/switch';
+@use 'backend/buttons';
+@use 'backend/choices';
+@use 'backend/contao-icons';
+@use 'backend/login';
+@use 'backend/flat';

@@ -1,0 +1,16 @@
+Copyright (c) 2026 NEO Digital (https://neo-digital.at). All rights reserved.
+
+This software ("NEOcms by Contao", package neo/neocms-bundle) is proprietary.
+It may be installed and used on websites built or operated by NEO Digital and
+on websites of NEO Digital's clients. Any other copying, distribution,
+publication or sale requires prior written permission of NEO Digital.
+
+Contao itself is licensed under LGPL-3.0-or-later; this package only extends it
+and does not contain Contao source code.
+
+Third-party components included in this package (icons, fonts) are licensed
+under their own terms — see THIRD-PARTY.md.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THE SOFTWARE.

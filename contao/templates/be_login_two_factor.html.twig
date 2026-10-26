@@ -1,0 +1,13 @@
+{% extends "@Contao/be_login_two_factor.html.twig" %}
+
+{# NEOcms: wie be_login.html.twig — der zweite Schritt der Anmeldung (Code). #}
+{% block head %}
+    {{ parent()|replace({'<title>Contao |': '<title>' ~ ('MSC.neocms_name'|trans({}, 'contao_default'))|e('html') ~ ' |'})|raw }}
+{% endblock %}
+
+{% block container %}
+    <header class="neo-login-brand">
+        {{ include('@Contao/backend/_neocms_brand.html.twig', {modifier: 'login'}) }}
+    </header>
+    {{ parent() }}
+{% endblock %}

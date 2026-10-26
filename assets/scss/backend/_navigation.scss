@@ -1,0 +1,193 @@
+// ============================================================
+//  NEOcms — Seitenleiste
+//  Wie die Ordnerliste im NEO-Webmail-Skin: ruhige Zeilen mit Fluent-Icon,
+//  Auswahl getönt mit Akzentstrich am Rand. Bereichsköpfe klappen per Klick
+//  auf und zu (Contao-Bordmittel, gemerkt pro Benutzer) — der Pfeil zeigt
+//  den Zustand. Eingeklappt (Knopf in der Kopfzeile, ab 992 px) bleibt eine
+//  schmale Leiste nur mit Icons; der Name steht im Tooltip und bleibt für
+//  Screenreader im Link.
+// ============================================================
+
+@use 'sass:map';
+@use 'icons' as *;
+@use 'icon-map' as *;
+
+$rail: 64px;
+
+#left {
+  background: var(--neo-canvas);
+}
+
+#tl_navigation .menu_level_0 {
+  padding-top: 12px;
+}
+
+#tl_navigation .menu_level_0 > li:not(:first-of-type) {
+  margin: 14px 0 0;
+}
+
+// ---- Bereichsköpfe ----
+#tl_navigation .menu_level_0 a[class^="group-"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background-image: none;
+  font-size: 0.8125rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--neo-heading);
+
+  &::before {
+    @include fl-icon('apps');
+    color: var(--neo-icon);
+  }
+
+  &::after {
+    @include fl-icon('chevron_down', 16px);
+    margin-left: auto;
+    color: var(--neo-text-2);
+    transition: rotate var(--dur-base) var(--ease-out);
+  }
+
+  &[aria-expanded="false"]::after {
+    rotate: -90deg;
+  }
+
+  &:hover {
+    background-color: var(--neo-hover);
+  }
+}
+
+@each $group, $icon in $neo-group-icons {
+  #tl_navigation .menu_level_0 a.group-#{$group}::before {
+    mask-image: fl($icon);
+  }
+}
+
+// ---- Module ----
+#tl_navigation .menu_level_1 {
+  padding-top: 2px;
+}
+
+#tl_navigation .menu_level_1 li.has-children:not(.first),
+#tl_navigation .menu_level_1 li.has-children:not(.last) {
+  padding-block: 0;
+}
+
+#tl_navigation [class^="menu_level_"] a.navigation {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 1px 8px;
+  padding: 7px 10px 7px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: var(--neo-text);
+
+  &::before {
+    @include fl-icon('apps');
+    color: var(--neo-icon);
+  }
+
+  &:hover {
+    color: var(--neo-heading);
+    background-color: var(--neo-hover);
+  }
+}
+
+@each $module, $icon in $neo-nav-icons {
+  #tl_navigation a.navigation.#{$module}::before {
+    mask-image: fl($icon);
+  }
+}
+
+// Aktiver Eintrag: getönt, fett, Icon in Akzentfarbe, Strich ganz außen.
+// Contao zeichnet seinen Strich ins ::before — das trägt hier das Icon,
+// deshalb werden Contaos Strich-Maße zurückgesetzt und der Strich wandert
+// ins ::after.
+#tl_navigation [class^="menu_level_"] > li.current > a.navigation {
+  color: var(--neo-heading);
+  font-weight: var(--fw-bold);
+  background-color: var(--neo-selected);
+
+  &::before {
+    position: static;
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    background-color: var(--neo-toolbar-icon);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    bottom: 7px;
+    left: -8px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background-color: var(--neo-accent);
+  }
+}
+
+#left .version {
+  margin-top: 2em;
+  padding: 12px 18px;
+  color: var(--neo-text-2);
+}
+
+// ---- Eingeklappt: nur Icons ----
+@media (width >= 992px) {
+  html.neo-nav-collapsed {
+    #left {
+      width: $rail;
+    }
+
+    #main {
+      width: calc(100% - #{$rail});
+    }
+
+    // Alle Module zeigen, auch aus zugeklappten Bereichen — Köpfe werden zu
+    // Trennlinien, damit die Gruppen erkennbar bleiben.
+    #tl_navigation .collapsed .menu_level_1 {
+      display: block;
+    }
+
+    #tl_navigation .menu_level_0 a[class^="group-"] {
+      display: none;
+    }
+
+    #tl_navigation .menu_level_0 > li:not(:first-of-type) {
+      margin: 8px 12px 0;
+      padding-top: 8px;
+      border-top: 1px solid var(--neo-line-strong);
+    }
+
+    #tl_navigation .menu_level_0 > li:not(:first-of-type) > .menu_level_1 {
+      margin-inline: -12px;
+    }
+
+    #tl_navigation [class^="menu_level_"] a.navigation {
+      justify-content: center;
+      gap: 0;
+      margin: 2px 10px;
+      padding: 9px 0;
+      font-size: 0;
+    }
+
+    #left .version {
+      display: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #tl_navigation .menu_level_0 a[class^="group-"]::after {
+    transition: none;
+  }
+}

@@ -1,0 +1,44 @@
+/* ============================================================
+   NEOcms — Schriften (lokal im Bundle, kein CDN — DSGVO)
+   Text: Satoshi · Überschriften: Space Grotesk. Relativ zu backend.css in
+   /bundles/contaoneocms/; ?v= = Fassung (Cache-Bust, siehe _build.scss).
+   Lizenzen: THIRD-PARTY.md.
+   ============================================================ */
+
+@use '../build' as build;
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("fonts/Satoshi-Variable.woff2?v=#{build.$version}") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("fonts/SpaceGrotesk-Variable.woff2?v=#{build.$version}") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metrik-angepasste Fallbacks: belegen denselben Platz wie die echte
+   Schrift, der Wechsel beim Laden verschiebt nichts. */
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial");
+  size-adjust: 126.64%;
+  ascent-override: 77.7%;
+  descent-override: 23.06%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Satoshi Fallback";
+  src: local("Arial");
+  size-adjust: 134.12%;
+  ascent-override: 75.31%;
+  descent-override: 17.89%;
+  line-gap-override: 7.46%;
+}

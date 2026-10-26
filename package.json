@@ -1,0 +1,15 @@
+{
+  "name": "neocms-bundle-assets",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build der ausgelieferten Dateien von neo/neocms-bundle (public/).",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "package": "node tools/build.mjs && python tools/package.py"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "sass": "1.105.1"
+  }
+}

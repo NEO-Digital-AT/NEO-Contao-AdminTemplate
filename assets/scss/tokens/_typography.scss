@@ -1,0 +1,55 @@
+/* ============================================================
+   NEO Digital — Typography tokens
+   Display / brand: "Space Grotesk" (official local font)
+   Body:    "Satoshi" (self-hosted, lokale Variable-WOFF2) — pairs with Space Grotesk
+   Mono:    "JetBrains Mono" (Google) — for code / IT / data
+   @font-face declarations live in tokens/fonts.css.
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  /* Die "* Fallback"-Familien sind metrik-angepasstes Arial (tokens/_fonts.scss)
+     — gleicher Platzbedarf wie die echte Schrift, kein Layout-Shift beim Swap. */
+  --font-display: "Space Grotesk", "Space Grotesk Fallback", system-ui, sans-serif;
+  --font-body:    "Satoshi", "Satoshi Fallback", system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+
+  /* ---- Weights ---- */
+  --fw-regular: 400;  /* @kind font */
+  --fw-medium:  500;  /* @kind font */
+  --fw-semibold:600;  /* @kind font */
+  --fw-bold:    700;  /* @kind font */
+  --fw-black:   900;  /* @kind font */
+
+  /* ---- Fluid display scale (hero / section titles) ---- */
+  --fs-display-2xl: clamp(3.5rem, 7vw, 7rem);     /* @kind font */
+  --fs-display-xl:  clamp(2.75rem, 5.5vw, 5rem);  /* @kind font */
+  --fs-display-lg:  clamp(2.25rem, 4vw, 3.5rem);  /* @kind font */
+
+  /* ---- Heading scale ---- */
+  --fs-h1: clamp(2rem, 3.2vw, 3rem);        /* @kind font */
+  --fs-h2: clamp(1.6rem, 2.4vw, 2.25rem);   /* @kind font */
+  --fs-h3: clamp(1.3rem, 1.6vw, 1.625rem);  /* @kind font */
+  --fs-h4: 1.25rem;                         /* @kind font */
+  --fs-h5: 1.0625rem;                       /* @kind font */
+
+  /* ---- Body & UI scale ---- */
+  --fs-lead:  1.25rem;     /* intro paragraphs @kind font */
+  --fs-body:  1rem;        /* @kind font */
+  --fs-sm:    0.875rem;    /* @kind font */
+  --fs-xs:    0.75rem;     /* @kind font */
+  --fs-eyebrow: 0.8125rem; /* uppercase kicker labels @kind font */
+
+  /* ---- Line heights ---- */
+  --lh-tight:   1.04;   /* @kind font */
+  --lh-snug:    1.15;   /* @kind font */
+  --lh-normal:  1.55;   /* @kind font */
+  --lh-relaxed: 1.7;    /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-tighter: -0.04em;  /* display @kind font */
+  --ls-tight:   -0.02em;  /* headings @kind font */
+  --ls-normal:  0;        /* @kind font */
+  --ls-wide:    0.04em;   /* @kind font */
+  --ls-eyebrow: 0.18em;   /* uppercase kickers @kind font */
+}

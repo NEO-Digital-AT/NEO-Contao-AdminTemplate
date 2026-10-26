@@ -1,0 +1,187 @@
+// ============================================================
+//  NEOcms — Farbrollen (hell + dunkel)
+//  Die --neo-*-Rollen sind 1:1 die des NEO-Webmail-Skins (Roundcube,
+//  install-neo-skin.sh → styles/_neo.less): graue Fläche, Karten darauf,
+//  Violett hell / Neongrün dunkel. Darunter werden Contaos eigene
+//  Backend-Variablen auf diese Rollen gelegt — dieselben Selektoren wie
+//  bei Contao, später geladen → NEO gewinnt ohne !important.
+//
+//  Kontraste nachgerechnet (WCAG AA): Text ≥ 4,5:1; Feld-Unterkante,
+//  Schalter-Spur und Fokus ≥ 3:1. Statusfarben: helle Fassung mit Tinte
+//  abgedunkelt (rot 5,3:1, orange 5,3:1, grün 4,9:1 auf Weiß).
+//  Weiß steht als #fff da: Contao belegt --white dunkel mit Schwarz um.
+// ============================================================
+
+$light: (
+  // Rollen wie im Roundcube-Skin
+  'neo-canvas':              var(--ink-50),
+  'neo-card':                #fff,
+  'neo-card-border':         var(--ink-100),
+  'neo-line':                var(--ink-100),
+  'neo-line-strong':         var(--ink-150),
+  'neo-hover':               color-mix(in srgb, var(--violet-50) 65%, #fff),
+  'neo-selected':            var(--violet-50),
+  'neo-text':                var(--ink-800),
+  'neo-heading':             var(--violet-700),
+  'neo-text-2':              var(--ink-500),
+  'neo-icon':                var(--ink-500),
+  'neo-toolbar-icon':        var(--violet-500),
+  'neo-accent':              var(--violet-700),
+  'neo-accent-hover':        var(--violet-600),
+  'neo-accent-press':        var(--violet-800),
+  'neo-on-accent':           #fff,
+  'neo-accent-text':         var(--violet-600),
+  'neo-focus':               var(--violet-500),
+  'neo-topbar':              #fff,
+  'neo-input-bg':            #fff,
+  'neo-input-border':        var(--ink-150),
+  'neo-input-border-bottom': var(--ink-400),
+  'neo-danger-text':         color-mix(in srgb, var(--danger) 75%, var(--ink-950)),
+  'neo-switch-off':          var(--ink-400),
+  'neo-switch-knob':         #fff,
+
+  // Contaos Variablen
+  'font-family':             var(--font-body),
+  'border-radius':           var(--radius-xs),
+  'border-radius-lg':        var(--radius-md),
+  'text':                    var(--neo-text),
+  'header-bg':               var(--neo-topbar),
+  'body-bg':                 var(--neo-canvas),
+  'content-bg':              var(--neo-card),
+  'content-border':          var(--neo-card-border),
+  'gray':                    var(--neo-text-2),
+  'contao':                  var(--neo-accent),
+  'border':                  var(--neo-line),
+  'nav-bg-hover':            var(--neo-hover),
+  'nav-current':             var(--neo-selected),
+  'nav-group':               var(--neo-text-2),
+  'hover-row':               var(--neo-hover),
+  'invert-bg':               var(--ink-800),
+  'invert-text':             #fff,
+  'table-header':            var(--neo-canvas),
+  'table-odd':               var(--neo-card),
+  'table-even':              color-mix(in srgb, var(--ink-50) 50%, #fff),
+  'panel-bg':                var(--neo-canvas),
+  'tree-line':               var(--neo-line-strong),
+  'form-text-disabled':      var(--ink-300),
+  'form-border':             var(--neo-input-border),
+  'form-border-disabled':    var(--neo-line),
+  'form-bg':                 var(--neo-input-bg),
+  'form-bg-hover':           var(--neo-hover),
+  'form-button':             var(--neo-card),
+  'form-button-hover':       var(--neo-hover),
+  'form-button-active':      var(--neo-selected),
+  'form-button-disabled':    var(--neo-canvas),
+  'code-bg':                 var(--neo-canvas),
+  'checkerbox-bg':           var(--neo-line-strong),
+  'info':                    var(--neo-text-2),
+  'active-bg':               var(--neo-selected),
+  'active-border':           var(--violet-200),
+  'progress-running':        var(--neo-accent),
+  'drag-bg':                 var(--neo-selected),
+  'legend':                  var(--neo-heading),
+  'nested-bg':               color-mix(in srgb, var(--ink-50) 50%, #fff),
+  'search-field-bg':         var(--neo-input-bg),
+
+  // Statusfarben im NEO-Ton (Contao: grün, rot, blau, orange)
+  'green':                   var(--green-700),
+  'red':                     var(--neo-danger-text),
+  'blue':                    var(--violet-500),
+  'orange':                  color-mix(in srgb, var(--warning) 55%, var(--ink-950)),
+  'progress-finished':       var(--green-600),
+  'error-bg':                color-mix(in srgb, var(--danger) 10%, transparent),
+  'confirm-bg':              color-mix(in srgb, var(--green-400) 18%, transparent),
+  'info-bg':                 var(--violet-50),
+  'new-bg':                  color-mix(in srgb, var(--warning) 14%, transparent),
+);
+
+$dark: (
+  'neo-canvas':              var(--ink-950),
+  'neo-card':                var(--ink-900),
+  'neo-card-border':         var(--ink-800),
+  'neo-line':                var(--ink-800),
+  'neo-line-strong':         var(--ink-700),
+  'neo-hover':               var(--ink-850),
+  'neo-selected':            var(--ink-800),
+  'neo-text':                var(--ink-100),
+  'neo-heading':             var(--ink-50),
+  'neo-text-2':              var(--ink-300),
+  'neo-icon':                var(--ink-200),
+  'neo-toolbar-icon':        var(--green-400),
+  'neo-accent':              var(--green-400),
+  'neo-accent-hover':        var(--green-300),
+  'neo-accent-press':        var(--green-500),
+  'neo-on-accent':           var(--ink-950),
+  'neo-accent-text':         var(--green-300),
+  'neo-focus':               var(--green-400),
+  'neo-topbar':              var(--ink-950),
+  'neo-input-bg':            var(--ink-950),
+  'neo-input-border':        var(--ink-700),
+  'neo-input-border-bottom': var(--ink-400),
+  'neo-danger-text':         var(--danger),
+  'neo-switch-off':          var(--ink-400),
+  'neo-switch-knob':         var(--ink-50),
+
+  'text':                    var(--neo-text),
+  'header-bg':               var(--neo-topbar),
+  'body-bg':                 var(--neo-canvas),
+  'content-bg':              var(--neo-card),
+  'content-border':          var(--neo-card-border),
+  'gray':                    var(--neo-text-2),
+  'contao':                  var(--neo-accent),
+  'border':                  var(--neo-line),
+  'nav-bg-hover':            var(--neo-hover),
+  'nav-current':             var(--neo-selected),
+  'nav-group':               var(--neo-text-2),
+  'hover-row':               var(--neo-hover),
+  'invert-bg':               var(--ink-150),
+  'invert-text':             var(--ink-950),
+  'table-header':            var(--ink-950),
+  'table-odd':               var(--neo-card),
+  'table-even':              var(--ink-850),
+  'panel-bg':                var(--ink-850),
+  'tree-line':               var(--neo-line-strong),
+  'form-text-disabled':      var(--ink-500),
+  'form-border':             var(--neo-input-border),
+  'form-border-disabled':    var(--neo-line),
+  'form-bg':                 var(--neo-input-bg),
+  'form-bg-hover':           var(--neo-hover),
+  'form-button':             var(--ink-850),
+  'form-button-hover':       var(--ink-800),
+  'form-button-active':      var(--ink-700),
+  'form-button-disabled':    var(--ink-850),
+  'code-bg':                 var(--ink-800),
+  'checkerbox-bg':           var(--ink-800),
+  'info':                    var(--neo-text-2),
+  'active-bg':               var(--neo-selected),
+  'active-border':           var(--green-700),
+  'progress-running':        var(--neo-accent),
+  'drag-bg':                 var(--violet-800),
+  'legend':                  var(--neo-heading),
+  'nested-bg':               var(--ink-850),
+  'search-field-bg':         var(--neo-input-bg),
+
+  'green':                   var(--green-400),
+  'red':                     var(--danger),
+  'blue':                    var(--violet-300),
+  'orange':                  var(--warning),
+  'progress-finished':       var(--green-400),
+  'error-bg':                color-mix(in srgb, var(--danger) 16%, transparent),
+  'confirm-bg':              color-mix(in srgb, var(--green-400) 12%, transparent),
+  'info-bg':                 color-mix(in srgb, var(--violet-400) 18%, transparent),
+  'new-bg':                  color-mix(in srgb, var(--warning) 14%, transparent),
+);
+
+@mixin scheme($map) {
+  @each $name, $value in $map {
+    --#{$name}: #{$value};
+  }
+}
+
+:root {
+  @include scheme($light);
+}
+
+html[data-color-scheme="dark"] {
+  @include scheme($dark);
+}

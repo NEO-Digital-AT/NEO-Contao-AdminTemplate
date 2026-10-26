@@ -1,0 +1,68 @@
+// ============================================================
+//  NEOcms — Knöpfe
+//  40 px hoch, Ecken 4 px wie die Felder. Die Hauptaktion einer Leiste
+//  (erster Knopf: „Speichern") und „Anmelden" tragen die Hauptfarbe —
+//  violett mit weißer Schrift hell, neongrün mit dunkler Schrift dunkel.
+//  Alle übrigen Knöpfe bleiben ruhig (Umriss), damit die Hauptaktion
+//  eindeutig ist.
+// ============================================================
+
+$button-height: 40px;
+
+.tl_submit {
+  height: $button-height;
+  padding: 0 20px;
+  border: 1.5px solid var(--form-border);
+  border-radius: var(--radius-xs);
+  background: var(--form-button);
+  font-weight: var(--fw-bold);
+  line-height: $button-height - 3px;
+  transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+
+  &:hover {
+    border-color: var(--neo-focus);
+    background: var(--form-button-hover);
+  }
+
+  &:active {
+    color: inherit;
+    background: var(--form-button-active);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--neo-focus);
+    outline-offset: 2px;
+  }
+}
+
+// Hauptaktion
+.tl_submit_container > .tl_submit:first-child,
+.tl_login_form #login {
+  border-color: var(--neo-accent);
+  background: var(--neo-accent);
+  color: var(--neo-on-accent);
+
+  &:hover,
+  &:active {
+    border-color: var(--neo-accent-hover);
+    background: var(--neo-accent-hover);
+    color: var(--neo-on-accent);
+  }
+}
+
+// Filterleiste rechts: „Anwenden" / „Zurücksetzen" teilen sich eine schmale
+// Spalte — weniger Innenabstand, sonst wird „Zurücksetzen" abgeschnitten.
+.tl_submit_panel .tl_submit {
+  padding: 0 12px;
+}
+
+// „Speichern und …"-Klappknopf neben dem zweiten Knopf: gleiche Höhe
+.split-button .split-toggle {
+  height: $button-height;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl_submit {
+    transition: none;
+  }
+}

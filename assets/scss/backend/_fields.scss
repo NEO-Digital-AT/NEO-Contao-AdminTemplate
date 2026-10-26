@@ -1,0 +1,218 @@
+// ============================================================
+//  NEOcms — Eingabefelder und Auswahllisten
+//  Im Windows-/Fluent-Stil wie der NEO-Webmail-Skin: 40 px hoch, Ecken
+//  4 px, feiner Rahmen mit kräftigerer Unterkante (ink-400, ≥ 3:1 — sie
+//  macht das Feld erkennbar). Fokus: nur die Unterkante wird zur 2-px-Linie
+//  in der Akzentfarbe — kein Schein außen herum.
+// ============================================================
+
+@use 'icons' as *;
+
+$field-height: 40px;
+$field-pad-x: 12px;
+$label-gap: 5px;
+
+$text-fields:'.tl_text, .tl_text_2, .tl_text_3, .tl_text_4, .tl_text_unit, .tl_text_trbl, .tl_text_interval';
+$selects: '.tl_select, .tl_mselect, .tl_select_unit, .tl_select_interval';
+
+@mixin field-frame {
+  border: 1px solid var(--neo-input-border);
+  border-bottom-color: var(--neo-input-border-bottom);
+  background-color: var(--neo-input-bg);
+  color: var(--neo-text);
+  box-shadow: none;
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+
+  &:hover:not([disabled], [readonly]) {
+    border-color: var(--neo-line-strong);
+    border-bottom-color: var(--neo-text-2);
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: var(--neo-input-border);
+    border-bottom-color: var(--neo-focus);
+    box-shadow: inset 0 -1px 0 var(--neo-focus);
+  }
+
+  &[disabled],
+  &[readonly] {
+    border-color: var(--form-border-disabled);
+  }
+}
+
+#{$text-fields},
+#{$selects} {
+  @include field-frame;
+  height: $field-height;
+  padding: 0 $field-pad-x;
+  border-radius: var(--radius-xs);
+}
+
+// 5 px zwischen Beschriftung und Feld. Contao gibt Feldern oben 3 px —
+// der Abstand gehört der Beschriftung, das folgende Element startet bündig.
+.widget > h3 {
+  margin-bottom: $label-gap;
+
+  + * {
+    margin-top: 0;
+  }
+}
+
+// Platzhalter sind auf der Anmeldung die einzige sichtbare Beschriftung →
+// voller Textkontrast (--gray: ink-500 hell / ink-300 dunkel, ≥ 4,5:1).
+#{$text-fields},
+.tl_textarea,
+input[type="search"] {
+  &::placeholder {
+    color: var(--gray);
+    opacity: 1;
+  }
+}
+
+// Pfeil der Auswahlliste rechts im Feld statt am Inhaltsrand
+#{$selects} {
+  padding-right: $field-pad-x + 22px;
+  background-position: right $field-pad-x center;
+  background-size: 12px;
+  background-origin: padding-box;
+}
+
+.tl_textarea {
+  @include field-frame;
+  padding: 10px $field-pad-x;
+  border-radius: var(--radius-xs);
+}
+
+[data-controller="contao--textarea-autogrow"] {
+  min-height: $field-height;
+}
+
+select[multiple] {
+  height: auto;
+  padding: 6px;
+  border-radius: var(--radius-xs);
+}
+
+// Suchfeld und Auswahl in der Filter-Leiste rechts (Contao fixiert dort 30 px)
+.tl_panel :is(select, input:not([type="checkbox"], [type="radio"]), button),
+.content-filter :is(select, input:not([type="checkbox"], [type="radio"]), button) {
+  height: $field-height;
+}
+
+input[type="search"] {
+  height: $field-height;
+}
+
+// Augen-Knopf im Passwortfeld: in die Pille hinein, nicht an den Rand
+[data-controller="contao--password-visibility"] {
+  > input {
+    padding-right: 44px;
+  }
+
+  > button {
+    right: 10px;
+  }
+}
+
+// Häkchen (Zeilenauswahl) und Optionsfelder in der Hauptfarbe, etwas größer.
+// Formular-Checkboxen werden Schalter (_switch.scss).
+input:is([type="checkbox"], [type="radio"]) {
+  accent-color: var(--neo-accent);
+  inline-size: 16px;
+  block-size: 16px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+// ---- Auswahlliste aufgeklappt (Chromium ab 135: anpassbares Select) ----
+// Ohne Unterstützung bleibt die Liste des Systems — nichts geht verloren.
+// Mehrfachauswahl bleibt nativ (dafür gibt es noch keine stabile Variante).
+@supports (appearance: base-select) {
+  select:is(#{$selects}):not([multiple]) {
+    appearance: base-select;
+    display: inline-flex;
+    align-items: center;
+    background-image: none;
+    color: var(--text);
+
+    // Fluent-Pfeil wie bei den Choices-Listen
+    &::picker-icon {
+      @include fl-icon('chevron_down', 16px);
+      margin-left: auto;
+      color: var(--gray);
+      transition: rotate var(--dur-base) var(--ease-out);
+    }
+
+    &:open::picker-icon {
+      rotate: 180deg;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &::picker-icon {
+        transition: none;
+      }
+    }
+
+    &::picker(select) {
+      appearance: base-select;
+      margin-block: 6px;
+      padding: 6px;
+      max-height: min(360px, 60vh);
+      border: 1px solid var(--neo-line-strong);
+      border-radius: 8px;
+      background: var(--neo-card);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    option {
+      padding: 9px 12px;
+      border-radius: var(--radius-xs);
+      font-size: 0.875rem;
+      cursor: pointer;
+
+      &::checkmark {
+        @include fl-icon('checkmark', 16px);
+        order: 1;
+        margin-left: auto;
+        color: var(--neo-accent-text);
+      }
+
+      &:is(:hover, :focus-visible) {
+        outline: none;
+        background: var(--neo-selected);
+      }
+
+      &:checked {
+        font-weight: var(--fw-bold);
+      }
+    }
+
+    optgroup {
+      padding-top: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray);
+
+      option {
+        font-family: var(--font-body);
+        font-size: 0.875rem;
+        letter-spacing: 0;
+        text-transform: none;
+        color: var(--text);
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #{$text-fields},
+  #{$selects},
+  .tl_textarea {
+    transition: none;
+  }
+}

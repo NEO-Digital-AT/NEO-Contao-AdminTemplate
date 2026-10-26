@@ -1,0 +1,79 @@
+// ============================================================
+//  NEOcms — Schalter statt Häkchen
+//  Contaos Formular-Checkboxen (.tl_checkbox: „Veröffentlichen",
+//  „Element verstecken", Mehrfach-Optionen …) werden als Schalter
+//  gezeichnet. Es bleibt ein echtes <input type="checkbox"> — Tastatur
+//  (Leertaste), Screenreader und Formular verhalten sich wie bisher.
+//  Häkchen zur Zeilenauswahl in Listen und Bäumen (.tl_tree_checkbox)
+//  bleiben Häkchen: dort wählt man Einträge aus, man schaltet nichts ein.
+//
+//  Spur aus: ink-400 (≥ 3:1 auf beiden Hintergründen), an: Hauptfarbe.
+// ============================================================
+
+$track-w: 36px;
+$track-h: 20px;
+$gap: 3px;
+$knob: $track-h - 2 * $gap;
+
+input.tl_checkbox {
+  appearance: none;
+  position: relative;
+  flex: none;
+  inline-size: $track-w;
+  block-size: $track-h;
+  margin: 0 8px 0 0;
+  border: 0;
+  border-radius: $track-h;
+  background: var(--neo-switch-off);
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: $gap;
+    left: $gap;
+    inline-size: $knob;
+    block-size: $knob;
+    border-radius: 50%;
+    background: var(--neo-switch-knob);
+    transition: translate var(--dur-base) var(--ease-out);
+  }
+
+  &:checked {
+    background: var(--neo-accent);
+
+    &::before {
+      translate: $track-w - $knob - 2 * $gap 0;
+      background: var(--neo-on-accent);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--neo-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  + label {
+    vertical-align: middle;
+    cursor: pointer;
+  }
+}
+
+// Mehrfach-Optionen untereinander: etwas Luft zwischen den Zeilen
+.tl_checkbox_container input.tl_checkbox {
+  margin-block: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  input.tl_checkbox,
+  input.tl_checkbox::before {
+    transition: none;
+  }
+}

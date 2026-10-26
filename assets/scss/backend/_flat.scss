@@ -1,0 +1,21 @@
+// ============================================================
+//  NEOcms — kein Schein
+//  NEO-Vorgabe: nirgendwo ein Schatten oder Glühen um Elemente. Contao
+//  hebt seine schwebenden Menüs (Profil-Menü, „Weitere Aktionen",
+//  Brotkrumen-Unterseiten, Job-Übersicht, Meldungen) mit einem weichen
+//  Schatten ab — hier stattdessen ein kräftiger Rahmen, damit sie sich
+//  trotzdem klar von der Seite lösen.
+// ============================================================
+
+#tmenu ul.menu_level_1,
+.operations-menu,
+.subitems-list,
+[data-controller="contao--message-outlet"] .message .inner {
+  border: 1.5px solid var(--form-border);
+  box-shadow: none;
+}
+
+// Die Job-Übersicht hat ihren Rahmen nur beim Darüberfahren (Contao).
+#running-jobs {
+  box-shadow: none !important;
+}

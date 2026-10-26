@@ -1,0 +1,168 @@
+// ============================================================
+//  NEOcms — Auswahllisten mit Suche (Choices.js)
+//  Contao baut Felder mit „chosen" zu einer Choices-Liste um. Wie bei
+//  Contao trägt der äußere .choices-Kasten den Rahmen — er übernimmt die
+//  Feld-Klasse (tl_select …) und damit den Feldrahmen aus _fields.scss;
+//  .choices__inner bleibt rahmenlos. Fluent-Stil wie im NEO-Webmail-Skin:
+//  Fokus/geöffnet = Akzentlinie unten, Liste mit feiner Linie und 8 px
+//  Rundung, Pfeil und Häkchen als Fluent-Icons. Kein Schein.
+// ============================================================
+
+@use 'icons' as *;
+
+$choice-fields: '.tl_select, .tl_mselect, .tl_select_unit, .tl_select_interval';
+
+.choices:is(#{$choice-fields}) {
+  height: auto;
+  min-height: 40px;
+  padding: 0;
+  background-image: none;
+}
+
+.choices.is-focused,
+.choices.is-open {
+  border-color: var(--neo-input-border);
+  border-bottom-color: var(--neo-focus);
+  box-shadow: inset 0 -1px 0 var(--neo-focus);
+}
+
+// Contao nimmt der Unterkante beim Aufklappen die Rundung — bleibt 4 px.
+.choices.is-open:not(.is-flipped),
+.choices.is-open.is-flipped {
+  border-radius: var(--radius-xs);
+}
+
+.choices[data-type*="select-one"] .choices__inner {
+  display: flex;
+  align-items: center;
+  min-height: 37px;
+}
+
+.choices__list--single {
+  padding: 0 40px 0 12px;
+}
+
+// Pfeil: Fluent „chevron_down", senkrecht mittig, dreht beim Öffnen.
+.choices[data-type*="select-one"] .choices__inner::after {
+  @include fl-icon('chevron_down', 16px);
+  background-image: none;
+  top: 50%;
+  right: 12px;
+  margin-top: 0;
+  color: var(--gray);
+  transform: translateY(-50%);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.choices[data-type*="select-one"].is-open .choices__inner::after {
+  margin-top: 0;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+// Mehrfachauswahl: gewählte Werte als Pillen, Feld wächst mit
+.choices[data-type*="select-multiple"] {
+  &.is-open:not(.is-flipped),
+  &.is-open.is-flipped {
+    border-radius: var(--radius-xs);
+  }
+
+  .choices__inner {
+    padding: 5px 10px;
+  }
+}
+
+.choices__list--multiple .choices__item {
+  border: 1px solid var(--neo-line-strong);
+  border-radius: var(--radius-xs);
+  background: var(--neo-selected);
+  color: var(--text);
+  font-size: 0.8125rem;
+}
+
+// Aufgeklappte Liste: Rahmen statt Schatten
+.choices__list--dropdown,
+.choices__list[aria-expanded] {
+  margin-top: 6px;
+  padding: 6px;
+  border: 1px solid var(--neo-line-strong);
+  border-radius: 8px;
+  background: var(--neo-card);
+  box-shadow: none;
+}
+
+.is-flipped .choices__list--dropdown,
+.is-flipped .choices__list[aria-expanded] {
+  margin-bottom: 6px;
+  border-radius: 8px;
+}
+
+.choices__list--dropdown .choices__input,
+.choices__list[aria-expanded] .choices__input {
+  height: 36px;
+  margin-bottom: 6px;
+  padding: 0 12px;
+  border: 1px solid var(--neo-input-border);
+  border-bottom-color: var(--neo-input-border-bottom);
+  border-radius: var(--radius-xs);
+  background: var(--neo-input-bg);
+
+  &:focus {
+    outline: none;
+    border-bottom-color: var(--neo-focus);
+    box-shadow: inset 0 -1px 0 var(--neo-focus);
+  }
+}
+
+// Contaos Choices-CSS setzt beim markierten Eintrag padding-right: inherit
+// (= 0) mit einer Regel aus vier Klassen — das Häkchen säße am Rand.
+// Mit .choices davor gewinnt hier dieselbe Regel eine Stufe höher.
+.choices .choices__list--dropdown .choices__item,
+.choices .choices__list[aria-expanded] .choices__item,
+.choices .choices__list--dropdown .choices__item--selectable.is-highlighted[data-select-text],
+.choices .choices__list[aria-expanded] .choices__item--selectable.is-highlighted[data-select-text] {
+  padding: 9px 16px 9px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 0.875rem;
+}
+
+// Einträge unter einer Gruppen-Überschrift bleiben eingerückt (wie bei Contao)
+.choices .choices__list:has(> .choices__group) > .choices__item,
+.choices .choices__list:has(> .choices__group) > .choices__item--selectable.is-highlighted[data-select-text] {
+  padding-left: 24px;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted,
+.choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
+  background: var(--neo-selected);
+  color: var(--text);
+}
+
+// Gewählter Eintrag: fett + Fluent „checkmark" rechts. ::before statt ::after,
+// weil Contaos Choices-CSS das ::after gewählter Einträge mit !important
+// leert; order schiebt das Häkchen ans Zeilenende.
+.choices__list--dropdown .choices__item.is-selected,
+.choices__list[aria-expanded] .choices__item.is-selected {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: var(--fw-bold);
+
+  &::before {
+    @include fl-icon('checkmark', 16px);
+    order: 2;
+    margin-left: auto;
+    color: var(--neo-accent-text);
+  }
+}
+
+.choices__heading {
+  font-size: 0.75rem;
+  font-weight: var(--fw-bold);
+  color: var(--neo-text-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .choices[data-type*="select-one"] .choices__inner::after {
+    transition: none;
+  }
+}

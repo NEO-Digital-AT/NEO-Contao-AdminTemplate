@@ -1,0 +1,105 @@
+// ============================================================
+//  NEOcms — Anmeldeseite
+//  Wie die Anmeldung im NEO-Webmail-Skin: eine 440 px breite Card, oben darin
+//  das gestapelte NEOcms-Logo, darunter „Anmelden" groß in Space Grotesk —
+//  beides zentriert (NEO-Vorgabe: gestapeltes Logo = zentriert). Contaos
+//  Logo-Hintergrund fällt weg; die Fläche bleibt ruhig — ohne Schein und
+//  ohne Schatten.
+//  Das Logo steht im Markup VOR dem Formular (contao/templates/be_login.html.twig)
+//  und wird per negativem Abstand in die Card gezogen.
+// ============================================================
+
+$card: 440px;
+$pad: 44px;
+$logo-top: 40px;
+$logo-h: 56px;
+
+body:is(.be_login, .be_login_two_factor) {
+  background: var(--neo-canvas);
+
+  #container {
+    margin: 0 16px;
+  }
+
+  #main {
+    max-width: $card;
+    border: 1px solid var(--neo-card-border);
+    border-radius: 12px;
+    background: var(--neo-card);
+  }
+
+  .tl_login_form,
+  .login-providers {
+    background: transparent;
+  }
+
+  .formbody {
+    padding: ($logo-top + $logo-h + 28px) $pad 28px;
+  }
+
+  .login-providers {
+    padding: 0 $pad 36px;
+  }
+
+  .tl_login_form h1 {
+    margin-bottom: 1.1rem;
+    text-align: center;
+    font-size: 1.625rem;
+    letter-spacing: -0.02em;
+    color: var(--neo-heading);
+  }
+
+  .tl_text {
+    margin: 4px 0;
+  }
+
+  .submit_container {
+    margin-top: 16px;
+  }
+
+  .fe-link {
+    max-width: $card;
+    margin: 1.5rem auto 0;
+    font-size: 0.8125rem;
+    text-align: center;
+
+    a {
+      color: var(--neo-accent-text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+}
+
+.neo-login-brand {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: $card;
+  max-width: calc(100% - 32px);
+  margin: 13vh auto (-($logo-top + $logo-h));
+  padding: $logo-top $pad 0;
+  text-align: center;
+  pointer-events: none;
+
+  .neo-brand {
+    justify-content: center;
+  }
+}
+
+@media (width < 480px) {
+  .neo-login-brand {
+    margin-top: 6vh;
+    padding-inline: 28px;
+  }
+
+  body:is(.be_login, .be_login_two_factor) {
+    .formbody {
+      padding-inline: 28px;
+    }
+
+    .login-providers {
+      padding-inline: 28px;
+    }
+  }
+}

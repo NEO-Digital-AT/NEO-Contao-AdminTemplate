@@ -1,0 +1,33 @@
+{% extends "@Contao/be_main.html.twig" %}
+
+{#
+    NEOcms: Kopfzeile wie im NEO-Webmail-Skin — links der Knopf, der die
+    Seitenleiste einklappt (Desktop; public/backend.js merkt sich den Zustand),
+    daneben das NEOcms-Logo statt des Contao-Schriftzugs.
+    Der Rest des Blocks entspricht dem Contao-Kern (5.7). Bei einem
+    Contao-Update diesen Block mit dem Original in
+    vendor/contao/core-bundle/contao/templates/twig/be_main.html.twig abgleichen.
+#}
+{% block header %}
+    {% if not renderMainOnly %}
+        <header id="header">
+            <div class="inner">
+                <button type="button" class="neo-nav-toggle" aria-controls="left" aria-expanded="true"
+                        title="{{ 'MSC.hideMainNavigation'|trans({}, 'contao_default') }}"
+                        data-title-hide="{{ 'MSC.hideMainNavigation'|trans({}, 'contao_default') }}"
+                        data-title-show="{{ 'MSC.showMainNavigation'|trans({}, 'contao_default') }}">
+                    <span class="invisible">{{ 'MSC.hideMainNavigation'|trans({}, 'contao_default') }}</span>
+                </button>
+                <a href="{{ path('contao_backend') }}" accesskey="h" id="home" title="{{ home }}" data-contao--tooltips-target="tooltip">
+                    {{ include('@Contao/backend/_neocms_brand.html.twig') }}
+                    {% if badgeTitle|default %}
+                        <span class="badge-title">{{ badgeTitle }}</span>
+                    {% endif %}
+                </a>
+                {{ headerMenu|raw }}
+            </div>
+        </header>
+
+        {{ block('header_outlets') }}
+    {% endif %}
+{% endblock %}

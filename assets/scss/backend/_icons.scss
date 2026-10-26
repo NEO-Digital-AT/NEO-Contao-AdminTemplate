@@ -1,0 +1,51 @@
+// ============================================================
+//  NEOcms — Fluent-Icons als Maske
+//  Jedes Icon ist eine SVG-Datei unter public/icons/fluent/ (erzeugt von
+//  tools/fluent-icons.py). Das CSS nimmt die Form als Maske und füllt sie
+//  mit einer Farbe — Icons folgen so Farbschema und Hover, ohne je Farbe
+//  eine eigene Datei.
+//  Relativer Pfad = relativ zu backend.css in /bundles/contaoneocms/. Gilt,
+//  solange jede url() in DIESEM Stylesheet benutzt wird — eine Variable, die
+//  in Contaos Stylesheet landet, würde gegen dessen Ordner aufgelöst (404).
+//  ?v= = Versionsnummer: nginx hält /bundles/ ein Jahr im Cache, ein Update
+//  muss neue Adressen bekommen (tools/build.mjs schreibt _build.scss).
+// ============================================================
+
+@use '../build' as build;
+
+$fluent-path: 'icons/fluent/';
+
+@function fl($name) {
+  @return url('#{$fluent-path}#{$name}.svg?v=#{build.$version}');
+}
+
+// Icon als eigenes Pseudo-Element (::before/::after), Farbe = Textfarbe
+@mixin fl-icon($name, $size: 20px) {
+  content: "";
+  display: inline-block;
+  flex: none;
+  width: $size;
+  height: $size;
+  background-color: currentColor;
+  mask: fl($name) center / contain no-repeat;
+}
+
+// Contao-<img> durch ein Fluent-Icon ersetzen: Das Originalbild wird aus
+// seinem Rahmen geschoben, Fläche und alt-Text bleiben (Screenreader,
+// Tooltip); die Form kommt als Maske, die Farbe aus --neo-icon-current.
+// Gemeinsames steht einmal im Platzhalter (@extend fasst alle Selektoren
+// zu einer Regel zusammen), je Icon bleibt nur die Form.
+%fl-img {
+  object-position: -9999px 0;
+  background-color: var(--neo-icon-current, var(--neo-icon));
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  filter: none;
+  opacity: 1;
+}
+
+@mixin fl-img($name) {
+  @extend %fl-img;
+  mask-image: fl($name);
+}

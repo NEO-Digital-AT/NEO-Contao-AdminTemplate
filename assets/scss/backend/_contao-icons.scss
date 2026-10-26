@@ -1,0 +1,279 @@
+// ============================================================
+//  NEOcms — Contao-Icons → Microsoft Fluent UI System Icons
+//  Wie im NEO-Webmail-Skin. Zuordnung: _icon-map.scss.
+//  1. Bild-Icons (<img>): Bild aus dem Rahmen, Fluent-Form als Maske —
+//     alt-Text, Tooltip und Größe bleiben, die Farbe folgt dem Schema.
+//  2. Hintergrund-Icons (Kopfmenü, Abschnitte, Meldungen): Contaos Bild
+//     raus, Fluent-Icon als Pseudo-Element in Textfarbe.
+//  Was nicht in der Tabelle steht, wird farblos — kein buntes Contao-Icon
+//  bleibt übrig.
+// ============================================================
+
+@use 'sass:map';
+@use 'icons' as *;
+@use 'icon-map' as *;
+
+// ---- 1. Bild-Icons ----
+// :where() = Spezifität 0 — jede Zuordnung unten gewinnt sicher.
+img:where([src*="/themes/flexible/icons/"]) {
+  filter: grayscale(1);
+  opacity: 0.85;
+}
+
+// „NAME." = Grundform, „NAME--" = --dark / --disabled / --disabled--dark
+@each $contao, $fluent in $neo-img-icons {
+  img[src*="/icons/#{$contao}."],
+  img[src*="/icons/#{$contao}--"] {
+    @include fl-img($fluent);
+  }
+}
+
+// Zustände: Contao hängt an Seiten-, Artikel- und Konto-Icons eine Ziffer
+// (_1 … _7) bzw. „_" an. Die Form bleibt, der Zustand wird sichtbar:
+// +1 unveröffentlicht → blass, +2 versteckt → halb blass, +4 geschützt →
+// kleines Schloss; „_" (deaktiviertes Konto) → blass.
+$state-icons: regular, root, forward, redirect, error_401, error_403, error_404, error_503,
+  articles, feed, logout, admin, user, member;
+
+@each $contao in $state-icons {
+  img[src*="/icons/#{$contao}_"]:not([src*="_two_factor"]) {
+    @include fl-img(map.get($neo-img-icons, $contao) or 'document_one_page');
+  }
+}
+
+$unpublished: 1, 3, 5, 7;
+$hidden: 2, 6;
+$protected: 4, 5, 6, 7;
+
+@each $n in $hidden {
+  img[src*="_#{$n}.svg"],
+  img[src*="_#{$n}--dark.svg"] {
+    opacity: 0.6;
+  }
+}
+
+@each $n in $unpublished {
+  img[src*="_#{$n}.svg"],
+  img[src*="_#{$n}--dark.svg"] {
+    opacity: 0.4;
+  }
+}
+
+@each $n in $protected {
+  img[src*="_#{$n}.svg"],
+  img[src*="_#{$n}--dark.svg"] {
+    mask-image: var(--neo-state-icon), fl('lock_closed_filled');
+    mask-size: contain, 9px;
+    mask-position: center, right bottom;
+    mask-repeat: no-repeat;
+  }
+}
+
+img[src*="_.svg"],
+img[src*="_--dark.svg"],
+img[src*="--disabled"] {
+  opacity: 0.4;
+}
+
+// Das Schloss braucht die Grundform als Variable (zweite Maskenebene)
+@each $contao in $state-icons {
+  img[src*="/icons/#{$contao}_"]:not([src*="_two_factor"]) {
+    --neo-state-icon: #{fl(map.get($neo-img-icons, $contao) or 'document_one_page')};
+  }
+}
+
+// Farbe: ruhig; beim Darüberfahren Akzent, „Löschen" rot, Stern in Akzent
+:is(a, button):is(:hover, :focus-visible) > img {
+  --neo-icon-current: var(--neo-accent-text);
+}
+
+:is(a, button).delete:is(:hover, :focus-visible) > img {
+  --neo-icon-current: var(--neo-danger-text);
+}
+
+img[src*="/icons/featured"],
+img[src*="/icons/favorite_active"] {
+  --neo-icon-current: var(--neo-toolbar-icon);
+}
+
+// Benutzerlisten: Contao setzt das Konto-Icon als Inline-Hintergrund
+.list_icon_new {
+  position: relative;
+
+  @each $contao, $fluent in $neo-list-icons {
+    &[style*="/icons/#{$contao}"] {
+      background-image: none !important; // Contao setzt das Bild per style-Attribut
+
+      &::before {
+        @include fl-icon($fluent, 18px);
+        color: var(--neo-icon);
+      }
+    }
+  }
+
+  &[style*="_.svg"]::before {
+    opacity: 0.4;
+  }
+}
+
+// ---- 2. Hintergrund-Icons ----
+
+// Kopfmenü: Symbolknöpfe (Handbuch, Hinweise, Jobs, Favorit)
+#tmenu {
+  @each $class in (icon-manual, icon-alert, icon-jobs, icon-favorite, icon-favorite--active) {
+    .#{$class} {
+      background-image: none;
+
+      &::before {
+        @include fl-icon(map.get($neo-bg-icons, $class));
+        position: absolute;
+        inset: 0;
+        margin: auto;
+      }
+    }
+  }
+
+  .icon-favorite--active::before {
+    color: var(--neo-toolbar-icon);
+  }
+
+  // „Vorschau": Icon vor dem Text
+  .icon-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &::before {
+      @include fl-icon('open', 18px);
+    }
+  }
+
+  // Profil-Knopf: Fluent-Pfeil statt Contaos Hintergrundbild
+  .profile button {
+    background-image: none;
+
+    &::after {
+      @include fl-icon('chevron_down', 16px);
+      position: absolute;
+      top: 50%;
+      right: 9px;
+      translate: 0 -50%;
+    }
+  }
+
+  // Profil-Menü: Icon vor jedem Eintrag
+  @each $class in (icon-profile, icon-security, icon-favorites, icon-color-scheme, icon-logout) {
+    .#{$class} {
+      position: relative;
+      background-image: none;
+
+      &::before {
+        @include fl-icon(map.get($neo-bg-icons, $class), 18px);
+        position: absolute;
+        top: 50%;
+        left: 18px;
+        translate: 0 -50%;
+      }
+    }
+  }
+
+  // Schema-Umschalter: Mond im hellen, Sonne im dunklen Design
+  .icon-color-scheme::before {
+    mask-image: fl('weather_moon');
+  }
+
+  .icon-logout:hover {
+    color: var(--neo-danger-text);
+  }
+}
+
+html[data-color-scheme="dark"] #tmenu .icon-color-scheme::before {
+  mask-image: fl('weather_sunny');
+}
+
+// Abschnitts-Titel in Formularen: Pfeil, der beim Zuklappen nach rechts dreht
+fieldset:is(.tl_tbox, .tl_box) > legend:not(:has(> button)),
+fieldset:is(.tl_tbox, .tl_box) > legend > button {
+  position: relative;
+  background-image: none;
+
+  &::before {
+    @include fl-icon('chevron_down', 16px);
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    translate: 0 -50%;
+    color: var(--neo-icon);
+    transition: rotate var(--dur-base) var(--ease-out);
+  }
+}
+
+fieldset.collapsed > legend:not(:has(> button))::before,
+fieldset.collapsed > legend > button::before {
+  rotate: -90deg;
+}
+
+// Meldungen (Fehler, Erfolg, Hinweis, Neu): Icon in der Meldungsfarbe
+
+body:not(.be_login, .be_login_two_factor) {
+  @each $class, $icon in $neo-alert-icons {
+    .#{$class} {
+      position: relative;
+      background-image: none;
+
+      &::before {
+        @include fl-icon($icon, 18px);
+        position: absolute;
+        top: 10px;
+        left: 9px;
+      }
+    }
+  }
+
+  // Feldfehler im Formular stehen ohne Icon direkt unter dem Feld
+  :is(.tl_tbox, .tl_box) .tl_error::before {
+    content: none;
+  }
+
+  .tl_gerror {
+    position: relative;
+    background-image: none;
+
+    &::before {
+      @include fl-icon('error_circle', 18px);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      translate: 0 -50%;
+    }
+  }
+}
+
+// Auswahl-Fenster (Seiten, Dateien, Artikel): Reiter-Icons
+
+#picker-menu a {
+  position: relative;
+  background-image: none;
+
+  &::before {
+    @include fl-icon('arrow_move', 18px);
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    translate: 0 -50%;
+    color: var(--neo-icon);
+  }
+
+  @each $class, $icon in $neo-picker-icons {
+    &.#{$class}::before {
+      mask-image: fl($icon);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  fieldset:is(.tl_tbox, .tl_box) > legend::before,
+  fieldset:is(.tl_tbox, .tl_box) > legend > button::before {
+    transition: none;
+  }
+}

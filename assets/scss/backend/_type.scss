@@ -1,0 +1,42 @@
+// ============================================================
+//  NEOcms — Schrift, Überschriften, Fokus
+//  Wie auf der Website: Satoshi für Text, Space Grotesk für Überschriften.
+// ============================================================
+
+// Contao schaltet auf hochauflösenden Bildschirmen auf Gewicht 300 —
+// Satoshi wird darin in der kleinen Backend-Größe zu dünn.
+body,
+input,
+select,
+textarea,
+button {
+  font-weight: var(--fw-regular);
+}
+
+#main_headline,
+#main_breadcrumb,
+.tl_login_form h1,
+.content h2 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.01em;
+}
+
+#main_headline {
+  font-size: 1.125rem;
+}
+
+// Abschnitts-Titel in Formularen („Titel und Typ", „Text" …)
+fieldset:is(.tl_tbox, .tl_box) > legend,
+fieldset:is(.tl_tbox, .tl_box) > legend > button {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+}
+
+// Ein Fokus-Ring für alles, was Tastatur-Fokus bekommt — in der Hauptfarbe.
+// Felder und Knöpfe zeichnen ihren eigenen Ring (fields/buttons).
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--neo-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}

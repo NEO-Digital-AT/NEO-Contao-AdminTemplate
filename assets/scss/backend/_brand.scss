@@ -1,0 +1,121 @@
+// ============================================================
+//  NEOcms — Kopfzeile und Logo
+//  Wie im NEO-Webmail-Skin: 48 px hoch, links der Knopf zum Einklappen
+//  der Seitenleiste, daneben das Logo; rechts Contaos Kopfmenü als ruhige
+//  Symbolknöpfe. Logo: contao/templates/backend/_neocms_brand.html.twig — quer in
+//  der Kopfzeile, gestapelt auf der Anmeldung, je violett/neon.
+// ============================================================
+
+@use 'icons' as *;
+
+$topbar: 48px;
+
+.neo-brand {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.neo-brand__logo {
+  display: block;
+  width: auto;
+  height: 20px;
+  aspect-ratio: 1455.82 / 149.3; // viewBox des Querformats
+}
+
+.neo-brand--login .neo-brand__logo {
+  height: 56px;
+  aspect-ratio: 965 / 267.33; // viewBox des gestapelten Logos
+}
+
+.neo-brand__logo--dark,
+html[data-color-scheme="dark"] .neo-brand__logo--light {
+  display: none;
+}
+
+html[data-color-scheme="dark"] .neo-brand__logo--dark {
+  display: block;
+}
+
+// ---- Kopfzeile ----
+#header {
+  min-height: $topbar;
+  border-bottom: 1px solid var(--neo-line);
+  background: var(--neo-topbar);
+
+  .inner {
+    display: flex;
+    align-items: center;
+    min-height: $topbar;
+    padding: 0 8px;
+  }
+}
+
+.neo-nav-toggle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  margin-right: 2px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--neo-icon);
+  cursor: pointer;
+
+  &::before {
+    @include fl-icon('navigation');
+  }
+
+  &:hover {
+    background: var(--neo-hover);
+    color: var(--neo-heading);
+  }
+}
+
+// Unter 992 px klappt Contao die Leiste selbst (Burger im Kopfmenü).
+@media (width < 992px) {
+  .neo-nav-toggle {
+    display: none;
+  }
+}
+
+#home {
+  position: static;
+  display: flex;
+  align-items: center;
+  height: $topbar;
+  box-sizing: border-box;
+  padding: 0 10px;
+  background: none;
+}
+
+// Contaos Kopfmenü steckt in einem <nav> (mit Suche) — der schiebt nach rechts.
+#header .inner > nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+#tmenu {
+  align-items: center;
+
+  :is(a, .profile button) {
+    margin: 0;
+    border-radius: 6px;
+    color: var(--neo-text);
+  }
+
+  :is(a, .profile button, .burger button):hover {
+    color: var(--neo-heading);
+    background-color: var(--neo-hover);
+  }
+}
+
+@media (width < 600px) {
+  #home .neo-brand__logo {
+    height: 16px;
+  }
+}

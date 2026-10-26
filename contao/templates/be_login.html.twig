@@ -1,0 +1,22 @@
+{% extends "@Contao/be_login.html.twig" %}
+
+{#
+    NEOcms-Anmeldeseite: Produktname im Browser-Tab, das NEOcms-Logo über dem
+    Formular und „Zum Frontend" auf die Hauptdomain. Kopf- und Container-Block
+    bleiben die von Contao — nur Titel bzw. Link-Ziel werden ersetzt. Ändert
+    Contao das Markup einmal, greift das Ersetzen still nicht mehr und es gilt
+    wieder Contaos Original (nichts geht kaputt).
+    „Zum Frontend": Contao verlinkt fest auf „/" — bei einem Backend auf eigener
+    Subdomain wäre das die Admin-Domain. neocms_frontend_url() liefert die
+    Domain des Startpunkts (Neo\ContaoNeocmsBundle\Routing\FrontendBaseUrl).
+#}
+{% block head %}
+    {{ parent()|replace({'<title>Contao |': '<title>' ~ ('MSC.neocms_name'|trans({}, 'contao_default'))|e('html') ~ ' |'})|raw }}
+{% endblock %}
+
+{% block container %}
+    <header class="neo-login-brand">
+        {{ include('@Contao/backend/_neocms_brand.html.twig', {modifier: 'login'}) }}
+    </header>
+    {{ parent()|replace({'<p class="fe-link"><a href="/">': '<p class="fe-link"><a href="' ~ neocms_frontend_url()|e('html') ~ '">'})|raw }}
+{% endblock %}

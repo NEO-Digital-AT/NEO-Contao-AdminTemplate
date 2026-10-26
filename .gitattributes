@@ -1,0 +1,7 @@
+# Textdateien immer mit LF — das Paket läuft auf Linux-Servern, und die
+# gebauten Dateien in public/ sollen auf jedem Rechner byte-gleich bleiben.
+* text=auto eol=lf
+
+*.png   binary
+*.woff2 binary
+*.zip   binary
