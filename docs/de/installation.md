@@ -13,7 +13,7 @@ Datenbank-Änderungen, für den Look nichts einzustellen.
 
 ```json
 "repositories": [
-    { "type": "vcs", "url": "https://github.com/NEO-Digital-AT/Contao-NEOcms-by-NEO" }
+    { "type": "vcs", "url": "https://github.com/NEO-Digital-AT/NEO-Contao-AdminTemplate" }
 ],
 "require": { "neo/neocms-bundle": "^1.0" }
 ```

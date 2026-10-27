@@ -11,7 +11,7 @@ like any Contao extension, updatable in one place.
 | 2. Third-party extension | Contao extension list | Back end themes exist, but none carries the NEO design (logo, colours, Fluent icons, Roundcube look) |
 | 3. Existing NEO extension | super-agent, brevo-newsletter, llms bundles | None covers the back end |
 | 4. Extend an existing one | — | Different purpose; mixing would violate "one extension per task" |
-| 5. New extension | — | **`neo/neocms-bundle`**, repository `Contao-NEOcms-by-NEO` |
+| 5. New extension | — | **`neo/neocms-bundle`**, repository `NEO-Digital-AT/NEO-Contao-AdminTemplate` |
 
 **Consequences:** one source for all installations (the neo-digital.at website uses the
 package too); updates via Composer / Contao Manager; Contao core stays untouched.
