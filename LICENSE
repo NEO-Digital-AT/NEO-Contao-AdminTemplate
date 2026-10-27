@@ -1,16 +1,133 @@
-Copyright (c) 2026 NEO Digital (https://neo-digital.at). All rights reserved.
+LIZENZ — „NEOcms by Contao" (Paket neo/neocms-bundle)
+=======================================================
 
-This software ("NEOcms by Contao", package neo/neocms-bundle) is proprietary.
-It may be installed and used on websites built or operated by NEO Digital and
-on websites of NEO Digital's clients. Any other copying, distribution,
-publication or sale requires prior written permission of NEO Digital.
+Copyright © 2026 Erich Nigg, NEO Digital (https://neo-digital.at).
+Alle Rechte vorbehalten.
 
-Contao itself is licensed under LGPL-3.0-or-later; this package only extends it
-and does not contain Contao source code.
+Die deutsche Fassung ist verbindlich. Die englische Übersetzung unten dient
+nur dem Verständnis.
 
-Third-party components included in this package (icons, fonts) are licensed
-under their own terms — see THIRD-PARTY.md.
+1. Rechteinhaber
+   Alle Rechte an dieser Software — Quelltext, Gestaltung, Stylesheets,
+   Skripte, Vorlagen, Dokumentation, Screenshots sowie die Logos und die
+   Bezeichnung „NEOcms" — liegen ausschließlich bei Erich Nigg (NEO Digital),
+   im Folgenden „Rechteinhaber".
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THE SOFTWARE.
+2. Nutzung ausschließlich durch den Rechteinhaber
+   Die Software darf ausschließlich vom Rechteinhaber selbst verwendet werden.
+   Niemand sonst erhält ein Recht an der Software, weder ganz noch in Teilen.
+
+3. Ausdrücklich nicht erlaubt ist insbesondere,
+   a) die Software zu installieren oder zu nutzen — auch nicht für eigene
+      Websites, für Kunden oder zu Testzwecken;
+   b) sie zu vervielfältigen, weiterzugeben, zu veröffentlichen oder anderen
+      zugänglich zu machen;
+   c) sie anzupassen, zu bearbeiten, zu übersetzen oder Teile davon
+      (Code, Gestaltung, Logos) in andere Software oder Designs zu übernehmen;
+   d) sie zu verkaufen, zu vermieten, zu lizenzieren oder als eigene Leistung
+      auszugeben — auch nicht in veränderter Form oder unter anderem Namen.
+
+4. Öffentlich einsehbar heißt nicht frei nutzbar
+   Dass der Quelltext einsehbar ist (etwa in einem öffentlichen Repository),
+   räumt keinerlei Nutzungsrechte ein. Soweit die Nutzungsbedingungen einer
+   Plattform (z. B. GitHub) anderen Nutzern zwingend erlauben, den Quelltext
+   auf dieser Plattform anzusehen oder dort eine Kopie („Fork") anzulegen,
+   bleibt es bei genau diesem Umfang; jede darüber hinausgehende Nutzung ist
+   untersagt.
+
+5. Installationen durch den Rechteinhaber
+   Installiert der Rechteinhaber die Software auf einer Website, ist das eine
+   Nutzung durch den Rechteinhaber. Der Betreiber dieser Website erwirbt
+   dadurch keine Rechte an der Software. Er darf sie lediglich in dieser vom
+   Rechteinhaber eingerichteten Installation laufen lassen, solange der
+   Rechteinhaber das zulässt — nicht kopieren, anpassen, auf andere Websites
+   übertragen oder weitergeben. Der Rechteinhaber kann die Software jederzeit
+   entfernen.
+
+6. Ausnahmen
+   Jede Nutzung über diese Lizenz hinaus bedarf der vorherigen schriftlichen
+   Zustimmung des Rechteinhabers.
+
+7. Verstöße
+   Jede nicht erlaubte Nutzung verletzt die Urheber- und Markenrechte des
+   Rechteinhabers und kann Unterlassungs-, Beseitigungs- und
+   Schadenersatzansprüche nach sich ziehen.
+
+8. Bestandteile Dritter
+   Contao selbst steht unter LGPL-3.0-or-later; dieses Paket erweitert Contao
+   und enthält keinen Contao-Quelltext. Mitgelieferte Bestandteile Dritter
+   (Symbole, Schriften) stehen unter ihren eigenen Lizenzen — siehe
+   THIRD-PARTY.md. Diese Lizenz schränkt deren Rechte nicht ein und erweitert
+   sie nicht.
+
+9. Gewährleistung und Haftung
+   Die Software wird ohne Gewähr bereitgestellt. Eine Haftung besteht nur,
+   soweit sie gesetzlich zwingend ist.
+
+10. Recht und Gerichtsstand
+    Es gilt österreichisches Recht unter Ausschluss der Verweisungsnormen.
+    Gerichtsstand ist das für den Sitz des Rechteinhabers sachlich zuständige
+    Gericht.
+
+
+-------------------------------------------------------------------------------
+LICENCE — "NEOcms by Contao" (package neo/neocms-bundle)
+English translation for convenience only; the German version above is binding.
+
+Copyright © 2026 Erich Nigg, NEO Digital (https://neo-digital.at).
+All rights reserved.
+
+1. Rights holder
+   All rights in this software — source code, design, stylesheets, scripts,
+   templates, documentation, screenshots, and the "NEOcms" logos and name —
+   belong exclusively to Erich Nigg (NEO Digital), the "rights holder".
+
+2. Use by the rights holder only
+   The software may be used by the rights holder only. Nobody else is granted
+   any right to the software, in whole or in part.
+
+3. In particular, it is expressly not permitted to
+   a) install or use the software — including for one's own websites, for
+      clients or for testing;
+   b) copy, distribute, publish or make it available to others;
+   c) adapt, modify or translate it, or take any part of it (code, design,
+      logos) into other software or designs;
+   d) sell, rent or license it, or present it as one's own work — including
+      in modified form or under another name.
+
+4. Publicly visible does not mean free to use
+   The source code being visible (for example in a public repository) grants
+   no rights of use. Where a platform's terms of service (e.g. GitHub)
+   necessarily allow other users to view the source code on that platform or
+   to create a copy ("fork") there, that exact scope applies and nothing
+   more; any further use is prohibited.
+
+5. Installations by the rights holder
+   When the rights holder installs the software on a website, this is use by
+   the rights holder. The operator of that website acquires no rights to the
+   software. The operator may only let it run in that installation set up by
+   the rights holder, for as long as the rights holder allows — not copy,
+   adapt, transfer it to other websites or pass it on. The rights holder may
+   remove the software at any time.
+
+6. Exceptions
+   Any use beyond this licence requires the rights holder's prior written
+   consent.
+
+7. Infringements
+   Any use not permitted infringes the rights holder's copyright and trademark
+   rights and may give rise to claims for injunction, removal and damages.
+
+8. Third-party components
+   Contao itself is licensed under LGPL-3.0-or-later; this package extends
+   Contao and contains no Contao source code. Bundled third-party components
+   (icons, fonts) are licensed under their own terms — see THIRD-PARTY.md.
+   This licence neither restricts nor extends those rights.
+
+9. Warranty and liability
+   The software is provided without warranty. Liability exists only where
+   mandatory by law.
+
+10. Governing law and venue
+    Austrian law applies, excluding its conflict-of-law rules. The place of
+    jurisdiction is the competent court for the rights holder's seat.

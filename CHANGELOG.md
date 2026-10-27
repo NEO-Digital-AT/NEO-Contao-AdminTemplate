@@ -3,6 +3,13 @@
 All notable changes to `neo/neocms-bundle`. Versioning: [Semantic Versioning](https://semver.org).
 Written for whoever updates an installation: what changes for you, what to do.
 
+## 1.0.1 — 2026-10-27
+
+- **Licence:** all rights reserved by Erich Nigg (NEO Digital). Use only by the rights
+  holder; no right for anyone else to use, copy, modify, publish or sell the package.
+  German text binding, English translation included (`LICENSE`).
+- No code changes — nothing to do for existing installations.
+
 ## 1.0.0 — 2026-10-26
 
 First release.

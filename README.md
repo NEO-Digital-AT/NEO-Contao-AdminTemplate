@@ -46,5 +46,7 @@ Details, private repository setup and server notes: [docs/en/installation.md](do
 
 ## Licence
 
-Proprietary — for NEO Digital and its clients, see [LICENSE](LICENSE). Bundled icons and
-fonts: [THIRD-PARTY.md](THIRD-PARTY.md).
+**All rights reserved — Erich Nigg (NEO Digital).** This repository is public for viewing
+only. Nobody but the rights holder may install, use, copy, modify, publish or sell this
+software, in whole or in part. Details (German, binding, with English translation):
+[LICENSE](LICENSE). Bundled icons and fonts keep their own licences: [THIRD-PARTY.md](THIRD-PARTY.md).

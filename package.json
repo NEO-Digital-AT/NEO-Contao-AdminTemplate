@@ -1,6 +1,7 @@
 {
   "name": "neocms-bundle-assets",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "license": "UNLICENSED",
   "private": true,
   "description": "Build der ausgelieferten Dateien von neo/neocms-bundle (public/).",
   "type": "module",

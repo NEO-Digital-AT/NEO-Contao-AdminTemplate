@@ -16,5 +16,5 @@ as long as the copyright notice and the license are included: both are in
 `public/fonts/OFL.txt` (official text from openfontlicense.org, copyright line taken from
 the font file itself).
 
-The NEOcms logos in `public/brand/` are trademarks of NEO Digital and are covered by
-`LICENSE`.
+The NEOcms logos in `public/brand/` belong to Erich Nigg (NEO Digital) and are covered by
+`LICENSE` — no use by anyone else.
