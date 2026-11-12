@@ -3,6 +3,15 @@
 All notable changes to `neo/neocms-bundle`. Versioning: [Semantic Versioning](https://semver.org).
 Written for whoever updates an installation: what changes for you, what to do.
 
+## 1.0.2 — 2026-11-12
+
+- **Menu icons for the NEO extensions:** Access keys and licences (keys), Website-Check
+  (gauge), Cookie notice (cookie), Frontend Editor (window with pen), Translations,
+  Page styles (palette); the website's calculators in System (checklist, calculator,
+  inbox). Before, these entries showed the fallback icon. Five new Fluent icons in
+  `public/icons/fluent/`.
+- Nothing to do: install the new package; Contao clears its cache on update.
+
 ## 1.0.1 — 2026-10-27
 
 - **Licence:** all rights reserved by Erich Nigg (NEO Digital). Use only by the rights
