@@ -137,14 +137,25 @@ img[src*="/icons/favorite_active"] {
     color: var(--neo-toolbar-icon);
   }
 
-  // „Vorschau": Icon vor dem Text
+  // „Vorschau": Icon vor dem Text; Contaos eigenes Hintergrundbild weg (am
+  // Handy setzt Contao es wieder, dann lagen beide Icons übereinander)
   .icon-preview {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    background-image: none !important;
 
     &::before {
       @include fl-icon('open', 18px);
+    }
+  }
+
+  // Am Handy blendet Contao den Text aus (text-indent): das Icon mittig
+  @media (width < 768px) {
+    .icon-preview::before {
+      position: absolute;
+      inset: 0;
+      margin: auto;
     }
   }
 

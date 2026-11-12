@@ -10,6 +10,13 @@ Written for whoever updates an installation: what changes for you, what to do.
   Page styles (palette); the website's calculators in System (checklist, calculator,
   inbox). Before, these entries showed the fallback icon. Five new Fluent icons in
   `public/icons/fluent/`.
+- **Save button while sending:** Contao disables the button while the form is being sent;
+  its disabled colours (forced with `!important`) made the label unreadable — pale violet
+  with white text, in dark mode dark grey with dark text. The main action now keeps the
+  pressed colour (dark violet with white text, dark mode deep neon green with dark text)
+  until the page reloads.
+- **Preview icon on phones:** below 768 px Contao draws its own monitor icon as background
+  image again; it lay under the NEOcms icon. Only the NEOcms icon is shown now, centred.
 - Nothing to do: install the new package; Contao clears its cache on update.
 
 ## 1.0.1 — 2026-10-27
