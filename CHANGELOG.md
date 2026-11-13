@@ -3,6 +3,14 @@
 All notable changes to `neo/neocms-bundle`. Versioning: [Semantic Versioning](https://semver.org).
 Written for whoever updates an installation: what changes for you, what to do.
 
+## 1.0.4 — 2026-11-13
+
+- **Toolbar buttons with their own icon** (e.g. "Access keys and licences", "Protokoll" in
+  the SuperAgent): left and right padding now as on "New". Contao's rule for these buttons
+  (`#tl_buttons li a.has-icon`, padding `3px 0`) outranked the NEOcms rule from 1.0.3, so
+  only the height applied.
+- Nothing to do: install the new package; Contao clears its cache on update.
+
 ## 1.0.3 — 2026-11-12
 
 - **Toolbar above lists:** every button has the same shape now — also the ones extensions

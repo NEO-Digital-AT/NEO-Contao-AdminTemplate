@@ -53,8 +53,11 @@ $toolbar-buttons: header_clipboard, header_back, header_new, header_rss, header_
   // Every button of the toolbar gets the same shape, also the operations that
   // extensions add with their own icon (Skills, Protokoll, Verbindungen …):
   // before, only Contao's own classes below were styled and the others kept
-  // Contao's base padding and a tight hover area.
+  // Contao's base padding and a tight hover area. Contao's own rule for those
+  // ("#tl_buttons li a.has-icon": padding 3px 0) outranks the plain selector,
+  // so the .has-icon variant is named here as well.
   > ul > li > :is(a, button),
+  > ul > li > :is(a, button).has-icon,
   > ul > li > form > button {
     display: inline-flex;
     align-items: center;
