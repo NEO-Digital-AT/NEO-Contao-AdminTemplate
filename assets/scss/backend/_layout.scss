@@ -50,26 +50,55 @@ $toolbar-buttons: header_clipboard, header_back, header_new, header_rss, header_
 }
 
 #tl_buttons {
+  // Every button of the toolbar gets the same shape, also the operations that
+  // extensions add with their own icon (Skills, Protokoll, Verbindungen …):
+  // before, only Contao's own classes below were styled and the others kept
+  // Contao's base padding and a tight hover area. Contao's own rule for those
+  // ("#tl_buttons li a.has-icon": padding 3px 0) outranks the plain selector,
+  // so the .has-icon variant is named here as well.
+  > ul > li > :is(a, button),
+  > ul > li > :is(a, button).has-icon,
+  > ul > li > form > button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 36px;
+    margin: 0;
+    padding: 0 10px;
+    border-radius: 6px;
+    color: var(--neo-text);
+
+    > img {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+    }
+
+    &:hover {
+      color: var(--neo-heading);
+      background-color: var(--neo-hover);
+    }
+  }
+
+  // Contao pulls its (empty) "more" menu 15 px to the left; with the gaps of
+  // this toolbar that pushed the last button over the right edge of the card.
+  .operations-menu-container.is-hidden {
+    margin-left: 0;
+  }
+
   @each $class in $toolbar-buttons {
     .#{$class} {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      height: 36px;
-      margin: 0;
-      padding: 0 10px;
-      border-radius: 6px;
       background-image: none;
-      color: var(--neo-text);
+
+      // NEOcms draws the icon: Contao's own image (an extension may pass one,
+      // e.g. back.svg) would be a second icon next to it.
+      > img {
+        display: none;
+      }
 
       &::before {
         @include fl-icon(map.get($neo-bg-icons, $class));
         color: var(--neo-toolbar-icon);
-      }
-
-      &:hover {
-        color: var(--neo-heading);
-        background-color: var(--neo-hover);
       }
     }
   }

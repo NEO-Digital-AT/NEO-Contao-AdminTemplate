@@ -3,6 +3,42 @@
 All notable changes to `neo/neocms-bundle`. Versioning: [Semantic Versioning](https://semver.org).
 Written for whoever updates an installation: what changes for you, what to do.
 
+## 1.0.4 — 2026-11-13
+
+- **Toolbar buttons with their own icon** (e.g. "Access keys and licences", "Protokoll" in
+  the SuperAgent): left and right padding now as on "New". Contao's rule for these buttons
+  (`#tl_buttons li a.has-icon`, padding `3px 0`) outranked the NEOcms rule from 1.0.3, so
+  only the height applied.
+- Nothing to do: install the new package; Contao clears its cache on update.
+
+## 1.0.3 — 2026-11-12
+
+- **Toolbar above lists:** every button has the same shape now — also the ones extensions
+  add with their own icon (e.g. Skills, Protokoll, Verbindungen): same height, padding and
+  hover area as "New" or "Edit multiple". Before, they kept Contao's tight base style.
+- **Right edge:** Contao pulls its empty "more" menu 15 px to the left; together with the
+  toolbar gaps this pushed the last button over the right edge of the card. It ends inside
+  the padding now.
+- **One icon per button:** where NEOcms draws the icon (back, new, edit multiple …), an image
+  an extension passes along (e.g. a back arrow) is hidden — before, two arrows stood side by side.
+- Nothing to do: install the new package; Contao clears its cache on update.
+
+## 1.0.2 — 2026-11-12
+
+- **Menu icons for the NEO extensions:** Access keys and licences (keys), Website-Check
+  (gauge), Cookie notice (cookie), Frontend Editor (window with pen), Translations,
+  Page styles (palette); the website's calculators in System (checklist, calculator,
+  inbox). Before, these entries showed the fallback icon. Five new Fluent icons in
+  `public/icons/fluent/`.
+- **Save button while sending:** Contao disables the button while the form is being sent;
+  its disabled colours (forced with `!important`) made the label unreadable — pale violet
+  with white text, in dark mode dark grey with dark text. The main action now keeps the
+  pressed colour (dark violet with white text, dark mode deep neon green with dark text)
+  until the page reloads.
+- **Preview icon on phones:** below 768 px Contao draws its own monitor icon as background
+  image again; it lay under the NEOcms icon. Only the NEOcms icon is shown now, centred.
+- Nothing to do: install the new package; Contao clears its cache on update.
+
 ## 1.0.1 — 2026-10-27
 
 - **Licence:** all rights reserved by Erich Nigg (NEO Digital). Use only by the rights

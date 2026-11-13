@@ -42,11 +42,28 @@ $button-height: 40px;
   background: var(--neo-accent);
   color: var(--neo-on-accent);
 
-  &:hover,
-  &:active {
+  &:hover {
     border-color: var(--neo-accent-hover);
     background: var(--neo-accent-hover);
     color: var(--neo-on-accent);
+  }
+
+  // Pressed, and while the form is being sent: Contao disables the button
+  // then; its own disabled style made the label unreadable (pale background).
+  &:active,
+  &:disabled {
+    border-color: var(--neo-accent-press);
+    background: var(--neo-accent-press);
+    color: var(--neo-on-accent);
+    opacity: 1;
+  }
+
+  // Contao forces its disabled colours with !important (.tl_submit:disabled)
+  &:disabled {
+    border-color: var(--neo-accent-press) !important;
+    background: var(--neo-accent-press) !important;
+    color: var(--neo-on-accent) !important;
+    cursor: progress;
   }
 }
 
