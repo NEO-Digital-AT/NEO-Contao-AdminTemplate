@@ -3,6 +3,13 @@
 All notable changes to `neo/neocms-bundle`. Versioning: [Semantic Versioning](https://semver.org).
 Written for whoever updates an installation: what changes for you, what to do.
 
+## 1.0.5 — 2026-11-15
+
+- **Icon "Translate" in lists:** extensions that bring their own operation icon named
+  `translate` (e.g. the Frontend Editor's "Translate" in the lists of the sidebar) get the
+  Fluent icon, in the colour and line weight of the other operations.
+- Nothing to do: install the new package; Contao clears its cache on update.
+
 ## 1.0.4 — 2026-11-13
 
 - **Toolbar buttons with their own icon** (e.g. "Access keys and licences", "Protokoll" in
